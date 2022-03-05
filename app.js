@@ -1,11 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var methodOverride = require('method-override');
-var flash = require('connect-flash');
-var session = require('express-session');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const methodOverride = require('method-override');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cors = require('cors');
 
 const dashboardRouter = require('./app/dashboard/router');
 const usersRouter = require('./app/users/router');
@@ -15,8 +16,14 @@ const voucherRouter = require('./app/voucher/router');
 const bankRouter = require('./app/bank/router');
 const paymentRouter = require('./app/payment/router');
 const transactionRouter = require('./app/transaction/router');
+const playersRouter = require('./app/players/router');
+const authRouter = require('./app/auth/router');
+
+const URL = '/api/v1';
 
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +54,9 @@ app.use('/voucher', voucherRouter);
 app.use('/bank', bankRouter);
 app.use('/payment', paymentRouter);
 app.use('/transaction', transactionRouter);
-
+// create API
+app.use(`${URL}/players`, playersRouter);
+app.use(`${URL}/auth`, authRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
