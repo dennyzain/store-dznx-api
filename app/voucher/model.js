@@ -15,7 +15,7 @@ let voucherSchema = new Schema(
     thumbnail: {
       type: String,
     },
-    category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
+    category: { type: Schema.Types.ObjectId, ref: 'Category' },
     nominals: [{ type: Schema.Types.ObjectId, ref: 'Nominal' }],
     user: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
   },

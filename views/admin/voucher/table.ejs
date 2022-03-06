@@ -13,13 +13,10 @@
     <% for(let i=0;i < voucher.length ; i++){ %>
     <tr>
       <td><%= i+1%></td>
-      <td><%= voucher[i].name %></td>
+      <td><%= voucher[i]?.name ?? '-' %></td>
+      <td><%= voucher[i]?.category.name ?? '-' %></td>
 
-      <% if (voucher[i].category.length > 0) { %> <% voucher[i].category.forEach(data=>{ %>
-      <td><%= data.name %></td>
-      <% }) %> <% } else { %>
-      <td>-</td>
-      <% } %> <% if (voucher[i].nominals.length > 0) { %>
+      <% if (voucher[i].nominals.length > 0) { %>
 
       <td>
         <% voucher[i].nominals.forEach(data=>{ %>
