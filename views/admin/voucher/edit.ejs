@@ -47,16 +47,14 @@
                   </div>
                   <label >Nama Kategori</label>
                   <select class="form-control select2" style="width: 100%"  name="category" required>
-                    <% voucher.category.forEach(function(data) { %>
-                      <option value="<%= data._id %>"><%= data.name %></option>
-                    <% }) %>
+                      <option value="<%= voucher.category._id %>"><%= voucher.category.name %></option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Nominal</label>
                   <div class="select2-purple">
                     <select class="form-control select2 select2-purple" multiple="multiple" data-placeholder="Pilih Nominal" data-dropdown-css-class="select2-purple" style="width: 100%;" name="nominals" required>
-                      <% nominal.forEach(function(data) { %>
+                      <% voucher.nominals.forEach(function(data) { %>
                         <option value="<%= data._id %>"><%= data.coinName %> - <%= data.coinQuantity %></option>
                       <% }) %>
                     </select>

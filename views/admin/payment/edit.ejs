@@ -31,7 +31,7 @@
             <!-- /.card-header -->
             <!-- form start -->
             <div class="card-body">
-              <form action="/payment/create" method="POST">
+              <form action="/payment/edit/<%= payment._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                   <label for="type">Tipe Transaksi</label>
                   <input
@@ -39,6 +39,7 @@
                     class="form-control"
                     name="type"
                     id="type"
+                    value="<%= payment.type %>"
                     placeholder="Masukkan Nama Transaksi"
                   />
                 </div>
@@ -46,7 +47,7 @@
                   <label>Nama Bank</label>
                   <div class="select2-purple">
                     <select
-                      class="form-control select2"
+                    class="form-control select2"
                       data-dropdown-css-class="select2-purple"
                       multiple="multiple"
                       data-placeholder="Pilih Penerima"
@@ -54,7 +55,7 @@
                       name="banks"
                       required
                     >
-                      <% bank.forEach(data=>{ %>
+                      <% payment.banks.forEach(data=>{ %>
                       <option value="<%= data._id %>">
                         <%= data.name %>-<%= data.bankName %>-<%= data.accountNumber %>
                       </option>
@@ -63,7 +64,7 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Tambah</button>
+                  <button type="submit" class="btn btn-primary">Ubah</button>
                 </div>
               </form>
             </div>
