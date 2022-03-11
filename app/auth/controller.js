@@ -3,6 +3,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const fs=require('fs')
 
 module.exports = {
   signUp: async (req, res, next) => {
@@ -30,25 +31,37 @@ module.exports = {
             delete player._doc.password;
 
             res.status(201).json({ data: player });
-          } catch (err) {
-            if (err && err.name === 'ValidationError') {
+          } catch (error) {
+            if (error && error.name === 'ValidationError') {
               return res.status(422).json({
                 error: 1,
-                message: err.message,
-                fields: err.errors,
+                message: error.message,
+                fields: error.errors,
               });
             }
-            next(err);
+            next(error);
           }
         });
       } else {
-        let player = new Player(payload);
-
-        await player.save();
-
-        delete player._doc.password;
-
-        res.status(201).json({ data: player });
+        try {
+          let player = new Player(payload);
+  
+          await player.save();
+  
+          delete player._doc.password;
+  
+          res.status(201).json({ data: player });
+          
+        }catch (error) {
+          if (error && error.name === 'ValidationError') {
+            return res.status(422).json({
+              error: 1,
+              message: error.message,
+              fields: error.errors,
+            });
+          }
+          next(error);
+        }
       }
     } catch (error) {
       if (error.name && error === 'ValidationError') {

@@ -21,7 +21,7 @@ module.exports = {
   detailPage: async (req, res) => {
     try {
       const { id } = req.params;
-      const payment=await Payment.find().populate('banks','_id name bankName ')
+      const payment=await Payment.find().populate('banks','_id name bankName accountNumber')
       const voucher = await Voucher.findOne({ _id: id })
         .populate('nominals')
         .populate('category')
@@ -71,8 +71,6 @@ module.exports = {
       let tax = (10 / 100) * res_nominal._doc.price;
       let value = res_nominal._doc.price - tax;
 
-      console.log('res_payment >>');
-      console.log(res_payment._doc);
       const payload = {
         historyVoucherTopup: {
           gameName: res_voucher._doc.name,
@@ -254,7 +252,6 @@ module.exports = {
             { new: true, runValidators: true }
           );
 
-          console.log(player);
 
           res.status(201).json({
             data: {
