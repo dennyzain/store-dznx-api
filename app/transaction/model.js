@@ -3,26 +3,36 @@ const { Schema, model } = mongoose;
 
 let transactionSchema = new Schema(
   {
-    voucherTopUpHistory: {
-      gameName: { type: String, required: [true, 'Nama Game Harus Diisi'] },
-      category: { type: String, required: [true, 'Kategori Harus Diisi'] },
+    historyVoucherTopup: {
+      gameName: { type: String, require: [true, 'nama game harus diisi.'] },
+      category: { type: String, require: [true, 'kategori harus diisi.'] },
       thumbnail: { type: String },
-      coinName: { type: String, required: [true, 'Nama Koin Harus Diisi'] },
-      coinQuantity: { type: String, required: [true, 'Jumlah Koin Harus Diisi'] },
+      coinName: { type: String, require: [true, 'nama koin harus diisi.'] },
+      coinQuantity: { type: String, require: [true, 'jumlah koin harus diisi.'] },
       price: { type: Number },
     },
+
     historyPayment: {
-      name: { type: String, required: [true, 'Nama Harus Diisi'] },
-      type: { type: String, required: [true, 'Tipe Transaksi Harus Diisi'] },
-      bankName: { type: String, required: [true, 'Nama Bank Harus Diisi'] },
-      accountNumber: { type: Number, required: [true, 'Nomor Rekening Harus Diisi'] },
+      name: { type: String, require: [true, 'nama harus diisi.'] },
+      type: { type: String, require: [true, 'tipe pembayaran harus diisi.'] },
+      bankName: { type: String, require: [true, 'nama bank harus diisi.'] },
+      noRekening: { type: String, require: [true, 'nomor rekening harus diisi.'] },
     },
+
     name: {
       type: String,
-      required: [true, 'Nama Harus Diisi'],
-      minLength: [3, 'Panjang Nama Minimal 3-225 Karakter'],
-      maxLength: [3, 'Panjang Nama Maksimal 3-225 Karakter'],
+      require: [true, 'nama harus diisi'],
+      maxlength: [225, 'panjang nama harus antara 3 - 225 karakter'],
+      minlength: [3, 'panjang nama harus antara 3 - 225 karakter'],
     },
+
+    accountUser: {
+      type: String,
+      require: [true, 'nama akun harus diisi'],
+      maxlength: [225, 'panjang nama harus antara 3 - 225 karakter'],
+      minlength: [3, 'panjang nama harus antara 3 - 225 karakter'],
+    },
+
     tax: {
       type: Number,
       default: 0,
@@ -60,7 +70,7 @@ let transactionSchema = new Schema(
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Users',
     },
   },
   { timestamps: true }
