@@ -16,7 +16,7 @@ let transactionSchema = new Schema(
       name: { type: String, require: [true, 'nama harus diisi.'] },
       type: { type: String, require: [true, 'tipe pembayaran harus diisi.'] },
       bankName: { type: String, require: [true, 'nama bank harus diisi.'] },
-      noRekening: { type: String, require: [true, 'nomor rekening harus diisi.'] },
+      accountNumber: { type: String, require: [true, 'nomor rekening harus diisi.'] },
     },
 
     name: {

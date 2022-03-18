@@ -84,7 +84,7 @@ module.exports = {
           name: res_bank._doc.name,
           type: res_payment._doc.type,
           bankName: res_bank._doc.bankName,
-          noRekening: res_bank._doc.noRekening,
+          accountNumber: res_bank._doc.accountNumber,
         },
 
         name: name,
